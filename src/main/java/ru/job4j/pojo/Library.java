@@ -29,8 +29,7 @@ public class Library {
         System.out.println("");
         for (int i = 0; i < arrayBook.length; i++) {
             Book book = arrayBook[i];
-            String titleBook = book.getTitle();
-            if (titleBook.equals("Clean code")) {
+            if ("Clean code".equals(book.getTitle())) {
                 System.out.println("Книга c именем \"Clean code\" нашлась под индексом - " + i
                         +  ". Книга имеет - " + book.getCount() + " страниц");
             }
