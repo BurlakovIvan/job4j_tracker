@@ -13,7 +13,7 @@ public class Tracker {
     }
 
     public List<Item> findAll() {
-        return items;
+        return new ArrayList<Item>(items);
     }
 
     public List<Item> findByName(String key) {
