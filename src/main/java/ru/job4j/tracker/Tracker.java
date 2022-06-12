@@ -1,37 +1,34 @@
 package ru.job4j.tracker;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class Tracker {
-    private final Item[] items = new Item[100];
+    private List<Item> items = new ArrayList<>();
     private int ids = 1;
-    private int size = 0;
 
     public Item add(Item item) {
         item.setId(ids++);
-        items[size++] = item;
+        items.add(item);
         return item;
     }
 
-    public Item[] findAll() {
-        return Arrays.copyOf(items, size);
+    public List<Item> findAll() {
+        return items;
     }
 
-    public Item[] findByName(String key) {
-        Item[] itemOnName = new Item[size];
-        int count = 0;
-        for (int i = 0; i < size; i++) {
-            if (key.equals(items[i].getName())) {
-                itemOnName[count++] = items[i];
+    public List<Item> findByName(String key) {
+        List<Item> itemOnName = new ArrayList<>();
+        for (Item item : items) {
+            if (key.equals(item.getName())) {
+                itemOnName.add(item);
             }
         }
-        itemOnName = Arrays.copyOf(itemOnName, count);
         return itemOnName;
     }
 
     public Item findById(int id) {
         int index = indexOf(id);
-        return index != -1 ? items[index] : null;
+        return index != -1 ? items.get(index) : null;
     }
 
     public boolean replace(int id, Item item) {
@@ -39,7 +36,7 @@ public class Tracker {
         boolean result = index != -1;
         if (result) {
             item.setId(id);
-            items[index] = item;
+            items.set(index, item);
         }
         return result;
     }
@@ -48,17 +45,15 @@ public class Tracker {
         int index = indexOf(id);
         boolean result = index != -1;
         if (result) {
-            System.arraycopy(items, index + 1, items, index, size - index - 1);
-            items[size - 1] = null;
-            size--;
+            items.remove(index);
         }
         return result;
     }
 
     private int indexOf(int id) {
-        for (int index = 0; index < size; index++) {
-            if (items[index] != null && items[index].getId() == id) {
-                return index;
+        for (int index = 0; index < items.size(); index++) {
+               if (items.get(index) != null && items.get(index).getId() == id) {
+                   return index;
             }
         }
         return -1;
