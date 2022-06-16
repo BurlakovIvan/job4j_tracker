@@ -29,5 +29,4 @@ public class PhoneDictionaryTest {
         ArrayList<Person> expected = new ArrayList<>();
         assertEquals(expected, persons);
     }
-
 }
