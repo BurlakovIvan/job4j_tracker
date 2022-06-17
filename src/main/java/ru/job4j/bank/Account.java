@@ -13,13 +13,13 @@ public class Account {
      */
     private String requisite;
     /**
-     * Содержит баланс на банковском счете, ти double
+     * Содержит баланс на банковском счете, тип double
      */
     private double balance;
 
     /**
      * Конструктор класса, инициализирует поля
-     * @param requisite - реквзиты счета, {@link ru.job4j.bank.Account#requisite}}
+     * @param requisite - реквизиты счета, {@link ru.job4j.bank.Account#requisite}}
      * @param balance - баланс счета, {@link ru.job4j.bank.Account#balance}}
      */
     public Account(String requisite, double balance) {
@@ -28,7 +28,7 @@ public class Account {
     }
 
     /**
-     * геттер поля реквизита счета, {@link ru.job4j.bank.Account#requisite}}
+     * геттер поля - реквизита счета {@link ru.job4j.bank.Account#requisite}}
      * @return возвращает реквизиты текущего счета
      */
     public String getRequisite() {
@@ -36,15 +36,16 @@ public class Account {
     }
 
     /**
-     * сеттер поля ревизиты счета, позволяет его заменить новыми данными, {@link ru.job4j.bank.Account#requisite}}
-     * @param requisite - реквизиты на которые следует заменить текузие данные
+     * сеттер поля - ревизиты счета {@link ru.job4j.bank.Account#requisite}},
+     * позволяет заменить данные в этом поле
+     * @param requisite - реквизиты на которые следует заменить текущие данные
      */
     public void setRequisite(String requisite) {
         this.requisite = requisite;
     }
 
     /**
-     * геттер поля баланс счета, {@link ru.job4j.bank.Account#balance}}
+     * геттер поля - баланс счета {@link ru.job4j.bank.Account#balance}}
      * @return возвращает баланс текущего счета
      */
     public double getBalance() {
@@ -52,7 +53,8 @@ public class Account {
     }
 
     /**
-     * сеттер поля баланс счета, позволяет его заменить новыми данными, {@link ru.job4j.bank.Account#balance}}
+     * сеттер поля - баланс счета {@link ru.job4j.bank.Account#balance}},
+     * позволяет заменить данные в этом поле
      * @param balance - баланс на который заменяется текущий
      */
     public void setBalance(double balance) {
