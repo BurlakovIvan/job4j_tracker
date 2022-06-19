@@ -12,6 +12,10 @@ public class Student {
         this.surname = surname;
     }
 
+    public Student(String surname, int score) {
+        this(score, surname);
+    }
+
     public int getScore() {
         return score;
     }
@@ -36,5 +40,13 @@ public class Student {
     @Override
     public int hashCode() {
         return Objects.hash(score, surname);
+    }
+
+    @Override
+    public String toString() {
+        return "Student{"
+                + "score=" + score
+                + ", surname='" + surname + '\''
+                + '}';
     }
 }
