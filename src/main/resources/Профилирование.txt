@@ -1,0 +1,49 @@
+jmap
+узнаем объекты каких классов у нас создавались во время работы приложения
+Пример:
+ 692:             1             16  org.apache.log4j.or.RendererMap
+ 693:             1             16  org.apache.log4j.spi.DefaultRepositorySelector
+ 694:             1             16  ru.job4j.tracker.ConsoleInput
+ 695:             1             16  ru.job4j.tracker.ConsoleOutput
+ 696:             1             16  ru.job4j.tracker.CreateAction
+ 697:             1             16  ru.job4j.tracker.CreateManyAction
+ 698:             1             16  ru.job4j.tracker.DeleteAction
+ 699:             1             16  ru.job4j.tracker.DeleteManyAction
+ 700:             1             16  ru.job4j.tracker.Exit
+ 701:             1             16  ru.job4j.tracker.FindByIdAction
+ 702:             1             16  ru.job4j.tracker.FindByNameAction
+ 703:             1             16  ru.job4j.tracker.ReplaceAction
+ 704:             1             16  ru.job4j.tracker.ShowAction
+ 705:             1             16  ru.job4j.tracker.StartUI
+ 706:             1             16  sun.net.DefaultProgressMeteringPolicy (java.base@17.0.3.1)
+ 707:             1             16  sun.net.spi.DefaultProxySelector (java.base@17.0.3.1)
+ 708:             1             16  sun.net.www.protocol.file.Handler (java.base@17.0.3.1)
+ 709:             1             16  sun.net.www.protocol.jar.Handler (java.base@17.0.3.1)
+ 710:             1             16  sun.net.www.protocol.jrt.Handler (java.base@17.0.3.1)
+
+
+jstat
+Посмотрим данные о состоянии участков памяти
+Часть информации:
+ S0C         S1C         S0U         S1U          EC           EU             OC                 OU            MC            MU       CCSC      CCSU     YGC     YGCT     FGC    FGCT     CGC    CGCT       GCT
+  0,0       16384,0        0,0     16384,0      95232,0    19456,0    1050624,0     792064,0     2624,0     2428,4     384,0        253,4     19         0,568       0        0,000       6          0,003      0,571
+  0,0       16384,0        0,0     16384,0      95232,0    19456,0    1050624,0     792064,0     2624,0     2428,4     384,0        253,4     19         0,568       0        0,000       6          0,003      0,571
+  0,0       16384,0        0,0     16384,0      95232,0    19456,0    1050624,0     792064,0     2624,0     2428,4     384,0        253,4     19         0,568       0        0,000       6          0,003      0,571
+
+
+jconsole
+Увидили, что при массовом удалении заявок, загрузка процессора доходила до 85 - 87 %.
+ Было задействовано 16 потоков. 
+Выделено памяти - 1 427 456 kbytes. Но хип был занят на 50 - 60 % -847 360 kbytes.
+работа сборщика мусора - GC time: 0,567 seconds on G1 Young Generation (19 collections); 0,000 seconds on G1 Old Generation (0 collections)
+Загружено классов - 2 494
+
+Последующие запуски показывали примерно одинаковые результаты.
+
+При выходе за пределы памяти:
+Used:  1 417 539 kbytes
+Committed: 1 426 432 kbytes
+Max: 1 427 456 kbytes
+GC time: 1,879 seconds on G1 Young Generation (74 collections)
+ 3,829 seconds on G1 Old Generation (1 collections)
+Видим что произошло приближение к максимально доступному размеру памяти, после чего произошел вылет программы с ошибкой, в остальном все выглядело как и обыно
