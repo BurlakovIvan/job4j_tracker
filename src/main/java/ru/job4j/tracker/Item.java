@@ -8,12 +8,11 @@ import java.time.format.DateTimeFormatter;
 @AllArgsConstructor
 @ToString
 @NoArgsConstructor
+@EqualsAndHashCode(exclude = "dateTime")
 public class Item implements Comparable<Item> {
 
     private static final DateTimeFormatter FORMATTER
             = DateTimeFormatter.ofPattern("dd-MMMM-EEEE-yyyy HH:mm:ss");
-
-    @EqualsAndHashCode.Include
     private int id;
     private String name;
     private LocalDateTime dateTime = LocalDateTime.now();
