@@ -1,6 +1,8 @@
 package ru.job4j.tracker;
 
 import lombok.*;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -8,14 +10,18 @@ import java.time.format.DateTimeFormatter;
 @AllArgsConstructor
 @ToString
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = "dateTime")
+@Entity
+@Table(name = "items")
+@EqualsAndHashCode(exclude = "created")
 public class Item implements Comparable<Item> {
 
     private static final DateTimeFormatter FORMATTER
             = DateTimeFormatter.ofPattern("dd-MMMM-EEEE-yyyy HH:mm:ss");
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String name;
-    private LocalDateTime dateTime = LocalDateTime.now();
+    private LocalDateTime created = LocalDateTime.now();
 
     public Item(String name) {
         this.name = name;
@@ -28,7 +34,7 @@ public class Item implements Comparable<Item> {
 
     public Item(String name, LocalDateTime created) {
         this.name = name;
-        this.dateTime = created;
+        this.created = created;
     }
 
     @Override

@@ -53,7 +53,7 @@ public class SqlTracker implements Store, AutoCloseable {
                              Statement.RETURN_GENERATED_KEYS
                      )) {
             statement.setString(1, item.getName());
-            Timestamp timestampFromLDT = Timestamp.valueOf(item.getDateTime());
+            Timestamp timestampFromLDT = Timestamp.valueOf(item.getCreated());
             statement.setTimestamp(2, timestampFromLDT);
             statement.execute();
             try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
@@ -75,7 +75,7 @@ public class SqlTracker implements Store, AutoCloseable {
                              "UPDATE items SET name = ?, created = ? WHERE id = ?;"
                      )) {
             statement.setString(1, item.getName());
-            Timestamp timestampFromLDT = Timestamp.valueOf(item.getDateTime());
+            Timestamp timestampFromLDT = Timestamp.valueOf(item.getCreated());
             statement.setTimestamp(2, timestampFromLDT);
             statement.setInt(3, id);
             rsl = statement.executeUpdate() > 0;
