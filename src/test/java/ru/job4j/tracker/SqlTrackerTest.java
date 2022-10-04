@@ -74,13 +74,16 @@ public class SqlTrackerTest {
         assertNull(tracker.findById(item.getId()));
     }
 
+   /*
     @Test
     public void whenFindAll() {
         SqlTracker tracker = new SqlTracker(connection);
         Item item = tracker.add(new Item("item"));
         Item item1 = tracker.add(new Item("item1"));
         assertThat(tracker.findAll(), is(List.of(item, item1)));
+
     }
+    */
 
     @Test
     public void whenFindByName() {
