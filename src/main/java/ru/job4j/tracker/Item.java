@@ -5,6 +5,8 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import ru.job4j.toone.User;
 
 @Data
 @AllArgsConstructor
@@ -22,6 +24,13 @@ public class Item implements Comparable<Item> {
     private Integer id;
     private String name;
     private LocalDateTime created = LocalDateTime.now();
+    @ManyToMany
+    @JoinTable(
+            name = "participates",
+            joinColumns = { @JoinColumn(name = "item_id") },
+            inverseJoinColumns = { @JoinColumn(name = "user_id") }
+    )
+    private List<User> participates;
 
     public Item(String name) {
         this.name = name;
@@ -30,6 +39,12 @@ public class Item implements Comparable<Item> {
     public Item(int id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public Item(int id, String name, LocalDateTime created) {
+        this.id = id;
+        this.name = name;
+        this.created = created;
     }
 
     public Item(String name, LocalDateTime created) {
