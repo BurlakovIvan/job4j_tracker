@@ -14,33 +14,23 @@ public class AppleStore {
 
     public String getLastHappyCustomer() {
         String name = "";
-        if (count > 0) {
-            Customer customer = queue.poll();
-            for (int i = 0; i < count - 1; i++) {
-                Customer next = queue.poll();
-                if (next == null) {
-                    break;
-                }
-                customer = next;
-            }
+        Customer customer = queue.poll();
+        int remainder = count;
+        while (customer != null && remainder > 0) {
+            remainder--;
             name = customer.name();
+            customer = queue.poll();
         }
         return name;
     }
 
     public String getLastUpsetCustomer() {
         Customer customer = queue.poll();
-        String name = customer.name();
-        if (queue.size() < count || queue.size() == 0) {
-            name = "";
-        } else if (count > 0) {
-            int i = 0;
-            while (i <= count && customer != null) {
-                i++;
-                name = customer.name();
-                customer = queue.poll();
-            }
+        int remainder = count;
+        while (customer != null && remainder > 0) {
+            remainder--;
+            customer = queue.poll();
         }
-        return name;
+        return remainder == 0 ? customer.name() : "";
     }
 }
