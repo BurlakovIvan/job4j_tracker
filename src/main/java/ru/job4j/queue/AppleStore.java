@@ -13,24 +13,20 @@ public class AppleStore {
     }
 
     public String getLastHappyCustomer() {
-        String name = "";
-        Customer customer = queue.poll();
-        int remainder = count;
-        while (customer != null && remainder > 0) {
-            remainder--;
-            name = customer.name();
-            customer = queue.poll();
+        String result = "";
+        int min = Math.min(count, queue.size());
+        for (int i = 0; i < min; i++) {
+            result = queue.poll().name();
         }
-        return name;
+        return result;
     }
 
     public String getLastUpsetCustomer() {
-        Customer customer = queue.poll();
-        int remainder = count;
-        while (customer != null && remainder > 0) {
-            remainder--;
-            customer = queue.poll();
+        String result = "";
+        int min = Math.min(count, queue.size() - 1);
+        for (int i = 0; i <= min; i++) {
+            result = queue.poll().name();
         }
-        return remainder == 0 ? customer.name() : "";
+        return count > min ? "" : result;
     }
 }

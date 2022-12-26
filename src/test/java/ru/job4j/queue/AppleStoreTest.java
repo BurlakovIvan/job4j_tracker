@@ -47,6 +47,17 @@ class AppleStoreTest {
     }
 
     @Test
+    void whenGetLastWhereCountEqualsQueue() {
+        Queue<Customer> customers = new LinkedList<>();
+        customers.add(new Customer("Petr", 1000));
+        customers.add(new Customer("Stas", 1500));
+        int count = 2;
+        AppleStore appleStore = new AppleStore(customers, count);
+        String customer = appleStore.getLastHappyCustomer();
+        assertThat(customer).isEqualTo("Stas");
+    }
+
+    @Test
     void whenGetFirst() {
         Queue<Customer> customers = new LinkedList<>();
         customers.add(new Customer("Petr", 1000));
